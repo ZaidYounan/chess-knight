@@ -6,15 +6,5 @@
     height:600px;
   }
 
-.Square {
-    height:75px;
-    width:75px;
-}
 
-.Dark-Tile {
-    background-color: green;
-}
 
-.Light-Tile {
-    background-color: beige;
-}
