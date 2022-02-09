@@ -11,7 +11,7 @@ const knightPosition = {
 
 function Board() {
     let board = [];
-    console.log(knightPosition)
+
     for (let i = verticalAxis.length - 1; i >= 0; i--) {
       for (let k = 0; k < horizontalAxis.length; k++) {
 
