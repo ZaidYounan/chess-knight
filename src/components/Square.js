@@ -20,9 +20,9 @@ function Square(props) {
         const number = axisOne + axisTwo + 2;
 
         if (number % 2 === 0) {
-            return "Light-Tile"
-        } else {
             return "Dark-Tile"
+        } else {
+            return "Light-Tile"
         }
     }
     
