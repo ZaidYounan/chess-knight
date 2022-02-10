@@ -18,6 +18,9 @@ let victorySquare = null;
     }
 })();
 
+let knightActive = null;
+
+
 function grabKnight(e) {
     if (e.target.classList.contains("Knight")) {
         const x = e.clientX -37.5;
@@ -25,6 +28,18 @@ function grabKnight(e) {
         e.target.style.position = "absolute";
         e.target.style.left = `${x}px`;
         e.target.style.top = `${y}px`;
+        knightActive = e.target; 
+    }
+}
+
+
+function moveKnight(e) {
+    if (knightActive && knightActive.classList.contains("Knight")) {
+        const x = e.clientX -37.5;
+        const y = e.clientY -37.5;
+        knightActive.style.position = "absolute";
+        knightActive.style.left = `${x}px`;
+        knightActive.style.top = `${y}px`;
     }
 }
 
@@ -42,7 +57,7 @@ function Board() {
       }
     }
 
-    return <div onMouseDown={e => grabKnight(e)} className="Board">{board}</div>;
+    return <div onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} className="Board">{board}</div>;
 }
 
 export default Board;
