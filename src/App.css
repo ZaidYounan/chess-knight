@@ -3,6 +3,7 @@
   justify-content:space-around;
   align-items:center;
   height:100vh;
+  background-color:rgb(103, 101, 101);
 }
 
 
@@ -12,16 +13,19 @@
   justify-content:center;
   width:150px;
   height:40px;
-  background-color:lime;
+  background-color:rgb(5, 207, 5);
   box-shadow: 5px 10px 15px black;
   user-select:none;
   font-size:large;
   font-weight:bold;
+  font-family: Helvetica;
+  border-radius:0.2em;
 }
 
 div.PlayButton:hover {
-  transition: all 0.15s;
-  font-size:x-large;
+  transition: all 0.2s;
   font-weight:bolder;
-  padding-right:10px;
+  padding-right:15px;
+  padding-left:15px;
+  color:whitesmoke;
 }
