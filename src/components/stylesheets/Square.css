@@ -22,6 +22,14 @@
     background-size:65px;
 }
 
+.Knight:hover {
+    cursor:grab
+}
+
+.Knight:active {
+    cursor:grabbing;
+}
+
 .Victory {
     width:75px;
     height:75px;
