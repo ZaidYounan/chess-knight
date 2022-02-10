@@ -32,7 +32,6 @@ function grabKnight(e) {
     }
 }
 
-
 function moveKnight(e) {
     if (knightActive && knightActive.classList.contains("Knight")) {
         const x = e.clientX -37.5;
@@ -40,6 +39,12 @@ function moveKnight(e) {
         knightActive.style.position = "absolute";
         knightActive.style.left = `${x}px`;
         knightActive.style.top = `${y}px`;
+    }
+}
+
+function dropKnight(e) {
+    if (knightActive) {
+        knightActive = null;
     }
 }
 
@@ -57,7 +62,7 @@ function Board() {
       }
     }
 
-    return <div onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} className="Board">{board}</div>;
+    return <div onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={e => dropKnight(e)} className="Board">{board}</div>;
 }
 
 export default Board;
