@@ -11,7 +11,7 @@ const initialKnightPosition = {
 
 let victorySquare = null;
 (function () {
-    while (victorySquare == null || victorySquare == `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`) {
+    while (victorySquare === null || victorySquare === `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`) {
         let xVictoryPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
         let yVictoryPosition = verticalAxis[Math.floor((Math.random() * 7) + 0)];
         return victorySquare = `${xVictoryPosition}${yVictoryPosition}`
@@ -57,7 +57,7 @@ function Board() {
 
         let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
 
-        board.push(<Square key={keyProp} {...{k, i, keyProp, board, initialKnightPosition, victorySquare}}/>
+        board.push(<Square key={keyProp} {...{k, i, keyProp, initialKnightPosition, victorySquare}}/>
         );
       }
     }
