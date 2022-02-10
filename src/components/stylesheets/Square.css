@@ -13,3 +13,19 @@
 .Light-Tile {
     background-color: beige;
 }
+
+.Knight {
+    width:75px;
+    height:75px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:65px;
+}
+
+.Victory {
+    width:75px;
+    height:75px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:65px;
+} 

@@ -9,17 +9,21 @@ function Square(props) {
     const {xKnightPosition, yKnightPosition} = initialKnightPosition;
     const initialKnight = `${xKnightPosition}${yKnightPosition}`
 
-    function knightShow() {
+    function initialImageShow() {
         if (keyProp == initialKnight) {
             return knightimg
+        } else if (keyProp == victorySquare) {
+            return victorysquareimg
         } else {
             return null
         }
     }
 
-    function victorySquareShow() {
+    function giveClass() {
         if (keyProp == victorySquare) {
-            return victorysquareimg
+            return "Victory"
+        } else if (keyProp == initialKnight) {
+            return "Knight"
         } else {
             return null
         }
@@ -37,8 +41,7 @@ function Square(props) {
     
     return (
         <div className={`Square ${tileColour(k, i)}`}>
-            <img src={knightShow()}></img>
-            <img src={victorySquareShow()}></img>
+            <div style={{backgroundImage: `url(${initialImageShow()})`}} className={giveClass()}></div>
         </div>);
 }
 
