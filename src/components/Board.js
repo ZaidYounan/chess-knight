@@ -18,9 +18,15 @@ let victorySquare = null;
     }
 })();
 
-console.log(victorySquare)
-
-console.log(`${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`)
+function grabKnight(e) {
+    if (e.target.classList.contains("Knight")) {
+        const x = e.clientX -37.5;
+        const y = e.clientY -37.5;
+        e.target.style.position = "absolute";
+        e.target.style.left = `${x}px`;
+        e.target.style.top = `${y}px`;
+    }
+}
 
 function Board() {
     let board = [];
@@ -36,7 +42,7 @@ function Board() {
       }
     }
 
-    return <div className="Board">{board}</div>;
+    return <div onMouseDown={e => grabKnight(e)} className="Board">{board}</div>;
 }
 
 export default Board;
