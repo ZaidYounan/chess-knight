@@ -37,3 +37,37 @@
     background-position:center;
     background-size:65px;
 } 
+
+.Axis {
+    position:absolute;
+}
+
+p.NumberAxis {
+    position:absolute;
+    margin-right: 150px;
+    color:whitesmoke;
+    font-size:x-large;
+}
+
+p.LetterAxis {
+    position:absolute;
+    margin-top: 150px;
+    color:whitesmoke;
+    font-size:x-large;
+}
+
+p.FirstNumber {
+    position:absolute;
+    right:70px;
+    top:-30px;
+    color:whitesmoke;
+    font-size:x-large;
+}
+
+p.FirstLetter {
+    position:absolute;
+    top:25px;
+    right:0px;
+    color:whitesmoke;
+    font-size:x-large;
+}

@@ -15,7 +15,6 @@ function App() {
     }
   }
 
-  console.log(game);
   return (
     <div className="App">
       {renderBoard()}
