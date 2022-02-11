@@ -9,7 +9,6 @@ function Square(props) {
     const {xKnightPosition, yKnightPosition} = initialKnightPosition;
     const initialKnight = `${xKnightPosition}${yKnightPosition}`
     const keyLetter = `${keyProp[0]}`
-    console.log(keyLetter)
 
     function initialImageShow() {
         if (keyProp === initialKnight) {
@@ -44,11 +43,11 @@ function Square(props) {
     function squareAxis(keyProp, i, keyLetter) {
         let number = i + 1;
         if (keyProp === "A1"){
-            return <div className="Axis"><p className="FirstNumber">1</p><p className="FirstLetter">A</p></div>
-        } else if (keyProp === `A${number}` && keyProp != "A1") {
-            return <p className="NumberAxis">{number}</p>
-        } else if (keyProp === `${keyLetter}1` && keyProp != "A1") {
-            return <p className="LetterAxis">{keyLetter}</p>
+            return <div className="Axis"><p className="FirstNumber Axis">1</p><p className="FirstLetter Axis">A</p></div>
+        } else if (keyProp === `A${number}` && keyProp !== "A1") {
+            return <p className="NumberAxis Axis">{number}</p>
+        } else if (keyProp === `${keyLetter}1` && keyProp !== "A1") {
+            return <p className="LetterAxis Axis">{keyLetter}</p>
         }
     }
     

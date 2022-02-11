@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Square from './Square';
 import './stylesheets/Board.css';
 
@@ -18,39 +18,64 @@ let victorySquare = null;
     }
 })();
 
-let knightActive = null;
-
-
-function grabKnight(e) {
-    if (e.target.classList.contains("Knight")) {
-        const x = e.clientX -37.5;
-        const y = e.clientY -37.5;
-        e.target.style.position = "absolute";
-        e.target.style.left = `${x}px`;
-        e.target.style.top = `${y}px`;
-        knightActive = e.target; 
-    }
-}
-
-function moveKnight(e) {
-    if (knightActive && knightActive.classList.contains("Knight")) {
-        const x = e.clientX -37.5;
-        const y = e.clientY -37.5;
-        knightActive.style.position = "absolute";
-        knightActive.style.left = `${x}px`;
-        knightActive.style.top = `${y}px`;
-    }
-}
-
-function dropKnight(e) {
-    if (knightActive) {
-        knightActive = null;
-    }
-}
-
 function Board() {
+    const boardRef = useRef(null);
+
     let board = [];
 
+    let knightActive = null;
+
+
+    function grabKnight(e) {
+        if (e.target.classList.contains("Knight")) {
+            const x = e.clientX -37.5;
+            const y = e.clientY -37.5;
+            e.target.style.position = "absolute";
+            e.target.style.left = `${x}px`;
+            e.target.style.top = `${y}px`;
+            knightActive = e.target; 
+        }
+    }
+
+    function moveKnight(e) {
+        const boardObject = boardRef.current;
+
+        if (knightActive && knightActive.classList.contains("Knight")) {
+
+            const minHorizontal = boardObject.offsetLeft - 13;
+            const minVertical = boardObject.offsetTop - 13;
+            const maxHorizontal = boardObject.offsetWidth + 105;
+            const maxVertical = boardObject.offsetHeight - 25;
+            const x = e.clientX -37.5;
+            const y = e.clientY -37.5;
+            knightActive.style.position = "absolute";
+            // knightActive.style.left = `${x}px`;
+            // knightActive.style.top = `${y}px`;
+
+            if (x < minHorizontal) {
+                knightActive.style.left = `${minHorizontal}px`;
+            } else if (x > maxHorizontal) {
+                knightActive.style.left = `${maxHorizontal}px`;
+            } else {
+                knightActive.style.left = `${x}px`;
+            }
+
+            if (y < minVertical) {
+                knightActive.style.top = `${minVertical}px`;
+            } else if (y > maxVertical) {
+                knightActive.style.top = `${maxVertical}px`;
+            }
+            else {
+                knightActive.style.top = `${y}px`;
+            }
+        }
+    }
+
+    function dropKnight(e) {
+        if (knightActive) {
+            knightActive = null;
+        }
+    }
 
     for (let i = verticalAxis.length - 1; i >= 0; i--) {
       for (let k = 0; k < horizontalAxis.length; k++) {
@@ -62,7 +87,7 @@ function Board() {
       }
     }
 
-    return <div onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={e => dropKnight(e)} className="Board">{board}</div>;
+    return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={e => dropKnight(e)} className="Board">{board}</div>;
 }
 
 export default Board;

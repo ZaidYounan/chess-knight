@@ -40,24 +40,23 @@
 
 .Axis {
     position:absolute;
+    user-select:none;
 }
 
 p.NumberAxis {
-    position:absolute;
     margin-right: 150px;
     color:whitesmoke;
     font-size:x-large;
 }
 
 p.LetterAxis {
-    position:absolute;
     margin-top: 150px;
     color:whitesmoke;
     font-size:x-large;
+    padding-bottom:15px;
 }
 
 p.FirstNumber {
-    position:absolute;
     right:70px;
     top:-30px;
     color:whitesmoke;
@@ -65,9 +64,8 @@ p.FirstNumber {
 }
 
 p.FirstLetter {
-    position:absolute;
-    top:25px;
-    right:0px;
+    top:18px;
+    right:-5px;
     color:whitesmoke;
     font-size:x-large;
 }
