@@ -44,7 +44,7 @@ function Board() {
 
             const minHorizontal = boardObject.offsetLeft - 13;
             const minVertical = boardObject.offsetTop - 13;
-            const maxHorizontal = boardObject.offsetWidth + 105;
+            const maxHorizontal = boardObject.offsetWidth + boardObject.offsetLeft - 60;
             const maxVertical = boardObject.offsetHeight - 25;
             const x = e.clientX -37.5;
             const y = e.clientY -37.5;
