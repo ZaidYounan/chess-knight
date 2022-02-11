@@ -49,8 +49,6 @@ function Board() {
             const x = e.clientX -37.5;
             const y = e.clientY -37.5;
             knightActive.style.position = "absolute";
-            // knightActive.style.left = `${x}px`;
-            // knightActive.style.top = `${y}px`;
 
             if (x < minHorizontal) {
                 knightActive.style.left = `${minHorizontal}px`;
@@ -71,7 +69,7 @@ function Board() {
         }
     }
 
-    function dropKnight(e) {
+    function dropKnight() {
         if (knightActive) {
             knightActive = null;
         }
@@ -87,7 +85,7 @@ function Board() {
       }
     }
 
-    return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={e => dropKnight(e)} className="Board">{board}</div>;
+    return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={() => dropKnight()} className="Board">{board}</div>;
 }
 
 export default Board;
