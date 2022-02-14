@@ -88,7 +88,7 @@ function Board() {
 
         let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
 
-        board.push(<Square key={keyProp} {...{k, i, keyProp, initialKnight, victorySquare}}/>
+        board.push(<Square key={keyProp} {...{k, i, keyProp, currentPosition, victorySquare}}/>
         );
       }
     }

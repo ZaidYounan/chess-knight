@@ -5,12 +5,12 @@ import victorysquareimg from '../images/victory.png';
 
 
 function Square(props) {
-    const {k, i, keyProp, initialKnight, victorySquare} = props;   
+    const {k, i, keyProp, currentPosition, victorySquare} = props;   
 
     const keyLetter = `${keyProp[0]}`
 
     function initialImageShow() {
-        if (keyProp === initialKnight) {
+        if (keyProp === currentPosition) {
             return knightimg
         } else if (keyProp === victorySquare) {
             return victorysquareimg
@@ -22,7 +22,7 @@ function Square(props) {
     function giveClass() {
         if (keyProp === victorySquare) {
             return "Victory"
-        } else if (keyProp === initialKnight) {
+        } else if (keyProp === currentPosition) {
             return "Knight"
         } else {
             return null
