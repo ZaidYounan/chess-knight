@@ -41,6 +41,7 @@ function Square(props) {
         }
     }
 
+
     function squareAxis(keyProp, i, keyLetter) {
         let number = i + 1;
         if (keyProp === "A1"){
@@ -53,7 +54,7 @@ function Square(props) {
     }
     
     return (
-        <div className={`Square ${tileColour(k, i)}`}>
+        <div className={`Square ${tileColour(k, i)} ${keyProp}`}>
             {squareAxis(keyProp, i, keyLetter)}
             <div style={{backgroundImage: `url(${initialImageShow()})`}} className={giveClass()}></div>
         </div>);

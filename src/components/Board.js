@@ -79,8 +79,14 @@ function Board() {
     }
 
     function dropKnight(e) {
-        console.log(e)
+
+        const boardObject = boardRef.current;
         if (knightActive) {
+            const x = e.clientX;
+            const y = e.clientY;
+            let element = document.elementsFromPoint(x, y);
+            let target = element[1];
+            setKnightPosition(target.classList[2])
             knightActive = null;
         }
     }
