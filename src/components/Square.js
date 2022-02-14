@@ -5,9 +5,8 @@ import victorysquareimg from '../images/victory.png';
 
 
 function Square(props) {
-    const {k, i, keyProp, initialKnightPosition, victorySquare} = props;   
-    const {xKnightPosition, yKnightPosition} = initialKnightPosition;
-    const initialKnight = `${xKnightPosition}${yKnightPosition}`
+    const {k, i, keyProp, initialKnight, victorySquare} = props;   
+
     const keyLetter = `${keyProp[0]}`
 
     function initialImageShow() {

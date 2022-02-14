@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Square from './Square';
 import './stylesheets/Board.css';
 
@@ -8,8 +8,11 @@ const initialKnightPosition = {
     xKnightPosition: horizontalAxis[Math.floor((Math.random() * 7) + 0)],
     yKnightPosition: verticalAxis[Math.floor((Math.random() * 7) + 0)]
 }
+const {xKnightPosition, yKnightPosition} = initialKnightPosition;
+const initialKnight = `${xKnightPosition}${yKnightPosition}`
 
 let victorySquare = null;
+
 (function () {
     while (victorySquare === null || victorySquare === `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`) {
         let xVictoryPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
@@ -20,6 +23,11 @@ let victorySquare = null;
 
 function Board() {
     const boardRef = useRef(null);
+    const [knightPosition, setKnightPosition] = useState("");
+    const [currentPosition] = useState(initialKnight || initialKnightPosition)
+    const [knightPlaced, setKnightPlaced] = useState(false);
+
+
 
     let board = [];
 
@@ -80,7 +88,7 @@ function Board() {
 
         let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
 
-        board.push(<Square key={keyProp} {...{k, i, keyProp, initialKnightPosition, victorySquare}}/>
+        board.push(<Square key={keyProp} {...{k, i, keyProp, initialKnight, victorySquare}}/>
         );
       }
     }
