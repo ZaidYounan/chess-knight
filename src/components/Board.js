@@ -24,7 +24,7 @@ let victorySquare = null;
 function Board() {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState("");
-    const [currentPosition] = useState(initialKnight || initialKnightPosition)
+    const [currentPosition] = useState(knightPosition || initialKnight);
     const [knightPlaced, setKnightPlaced] = useState(false);
 
 
