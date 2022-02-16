@@ -56,7 +56,7 @@ function Square(props) {
     return (
         <div className={`Square ${tileColour(k, i)} ${keyProp}`}>
             {squareAxis(keyProp, i, keyLetter)}
-            <div style={{backgroundImage: `url(${initialImageShow()})`}} className={giveClass()}></div>
+            <div className={giveClass()} style={{backgroundImage: `url(${initialImageShow()})`}}></div>
         </div>);
 }
 

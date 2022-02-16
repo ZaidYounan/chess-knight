@@ -23,16 +23,23 @@ let victorySquare = null;
 
 function Board() {
     const boardRef = useRef(null);
-    const [knightPosition, setKnightPosition] = useState("");
+    const [knightPosition, setKnightPosition] = useState(initialKnight);
     const [knightPlaced, setKnightPlaced] = useState(false);
 
-    if (!knightPosition) {
-        setKnightPosition(initialKnight);
-    }
 
     let board = [];
 
     let knightActive = null;
+
+    for (let i = verticalAxis.length - 1; i >= 0; i--) {
+        for (let k = 0; k < horizontalAxis.length; k++) {
+  
+          let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
+  
+          board.push(<Square key={keyProp} {...{k, i, keyProp, knightPosition, victorySquare}}/>
+          );
+        }
+      }
 
 
     function grabKnight(e) {
@@ -80,25 +87,14 @@ function Board() {
 
     function dropKnight(e) {
 
-        const boardObject = boardRef.current;
         if (knightActive) {
             const x = e.clientX;
             const y = e.clientY;
             let element = document.elementsFromPoint(x, y);
             let target = element[1];
-            setKnightPosition(target.classList[2])
             knightActive = null;
+            setKnightPosition(target.classList[2])
         }
-    }
-
-    for (let i = verticalAxis.length - 1; i >= 0; i--) {
-      for (let k = 0; k < horizontalAxis.length; k++) {
-
-        let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
-
-        board.push(<Square key={keyProp} {...{k, i, keyProp, knightPosition, victorySquare}}/>
-        );
-      }
     }
 
     return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div>;
