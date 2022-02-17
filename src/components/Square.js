@@ -10,15 +10,6 @@ function Square(props) {
     const keyLetter = `${keyProp[0]}`
     console.log(`knightPosition is ${knightPosition}`)
 
-    // // function moveShow() {
-    // //     if 
-    // // }
-
-    // if () {
-    //     console.log(keyProp); 
-    // }
-    console.log(knightActive)
-
     function initialImageShow() {
         if (keyProp === knightPosition) {
             return knightimg
@@ -41,13 +32,19 @@ function Square(props) {
 
     function tileColour(axisOne, axisTwo) {
         const number = axisOne + axisTwo + 2;
+        console.log(typeof validMoves["validFour"]);
+        console.log(typeof keyProp);
 
         if (number % 2 === 0) {
             return "Dark-Tile"
-        }  else if (knightActive && Object.values(validMoves).includes(keyProp)) {
-            return "ValidMove"
         }  else {
             return "Light-Tile"
+        }
+    }
+
+    function showValidMoves() {
+        if (knightActive && Object.values(validMoves).includes(keyProp)) {
+            return "ValidMove" 
         }
     }
 
@@ -64,7 +61,7 @@ function Square(props) {
     }
     
     return (
-        <div className={`Square ${tileColour(k, i)} ${keyProp}`}>
+        <div className={`Square ${tileColour(k, i)} ${keyProp} ${showValidMoves()}`}>
             {squareAxis(keyProp, i, keyLetter)}
             <div className={giveClass()} style={{backgroundImage: `url(${initialImageShow()})`}}></div>
         </div>);
