@@ -39,7 +39,8 @@
 } 
 
 .ValidMove {
-    background-color:orange;
+    background-color:goldenrod;
+    transition: all 0.15s;
 }
 
 .Axis {
