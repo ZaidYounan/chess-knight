@@ -5,11 +5,19 @@ import victorysquareimg from '../images/victory.png';
 
 
 function Square(props) {
-    const {k, i, keyProp, knightPosition, victorySquare} = props;   
+    const {k, i, keyProp, knightPosition, victorySquare, validMoves, knightActive} = props;   
 
     const keyLetter = `${keyProp[0]}`
     console.log(`knightPosition is ${knightPosition}`)
 
+    // // function moveShow() {
+    // //     if 
+    // // }
+
+    // if () {
+    //     console.log(keyProp); 
+    // }
+    console.log(knightActive)
 
     function initialImageShow() {
         if (keyProp === knightPosition) {
@@ -36,7 +44,9 @@ function Square(props) {
 
         if (number % 2 === 0) {
             return "Dark-Tile"
-        } else {
+        }  else if (knightActive && Object.values(validMoves).includes(keyProp)) {
+            return "ValidMove"
+        }  else {
             return "Light-Tile"
         }
     }

@@ -24,19 +24,29 @@ let victorySquare = null;
 function Board() {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState(initialKnight);
-    const [knightPlaced, setKnightPlaced] = useState(false);
-
+    const [knightActive, setKnightActive] = useState(null);
+    const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
+    const currentVertical = Number(knightPosition[1]);
+    const validMoves = {
+        validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${currentVertical + 2}`,
+        validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${currentVertical + 2}`,
+        validThree : `${horizontalAxis[currentHorizontalIndex + 1]}${currentVertical - 2}`,
+        validFour : `${horizontalAxis[currentHorizontalIndex - 1]}${currentVertical - 2}`,
+        validFive : `${horizontalAxis[currentHorizontalIndex + 2]}${currentVertical + 1}`,
+        validSix : `${horizontalAxis[currentHorizontalIndex - 2]}${currentVertical + 1}`,
+        validSeven : `${horizontalAxis[currentHorizontalIndex + 2]}${currentVertical - 1}`,
+        validEight : `${horizontalAxis[currentHorizontalIndex - 2]}${currentVertical - 1}`
+        };
 
     let board = [];
 
-    let knightActive = null;
 
     for (let i = verticalAxis.length - 1; i >= 0; i--) {
         for (let k = 0; k < horizontalAxis.length; k++) {
   
           let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
   
-          board.push(<Square key={keyProp} {...{k, i, keyProp, knightPosition, victorySquare}}/>
+          board.push(<Square key={keyProp} {...{k, i, keyProp, knightPosition, victorySquare, validMoves, knightActive}}/>
           );
         }
       }
@@ -49,7 +59,7 @@ function Board() {
             e.target.style.position = "absolute";
             e.target.style.left = `${x}px`;
             e.target.style.top = `${y}px`;
-            knightActive = e.target; 
+            setKnightActive(e.target); 
         }
     }
 
@@ -57,6 +67,7 @@ function Board() {
         const boardObject = boardRef.current;
 
         if (knightActive && knightActive.classList.contains("Knight")) {
+            
 
             const minHorizontal = boardObject.offsetLeft - 13;
             const minVertical = boardObject.offsetTop - 13;
@@ -92,8 +103,10 @@ function Board() {
             const y = e.clientY;
             let element = document.elementsFromPoint(x, y);
             let target = element[1];
-            knightActive = null;
-            setKnightPosition(target.classList[2])
+            setKnightActive(null);
+            if (Object.values(validMoves).includes(target.classList[2])) {
+                setKnightPosition(target.classList[2])
+            }
         }
     }
 
