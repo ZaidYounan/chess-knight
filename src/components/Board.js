@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Square from './Square';
 import './stylesheets/Board.css';
+import Modal from 'react-modal';
 
 const horizontalAxis= ["A", "B", "C", "D", "E", "F", "G", "H"];
 const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -25,7 +26,7 @@ function Board() {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState(initialKnight);
     const [knightActive, setKnightActive] = useState(null);
-    const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
+    const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);   
     const currentVertical = Number(knightPosition[1]);
     const validMoves = {
         validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${currentVertical + 2}`,
@@ -103,9 +104,11 @@ function Board() {
             const y = e.clientY;
             let element = document.elementsFromPoint(x, y);
             let target = element[1];
-            setKnightActive(null);
-            if (Object.values(validMoves).includes(target.classList[2])) {
-                setKnightPosition(target.classList[2])
+            if (Object.values(validMoves).includes(target.classList[2]) || target.classList[2] == knightPosition) {
+                setKnightPosition(target.classList[2]);
+                setKnightActive(null);
+            } else {
+                alert("That is not a valid move.");
             }
         }
     }

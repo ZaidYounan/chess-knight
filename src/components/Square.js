@@ -32,8 +32,6 @@ function Square(props) {
 
     function tileColour(axisOne, axisTwo) {
         const number = axisOne + axisTwo + 2;
-        console.log(typeof validMoves["validFour"]);
-        console.log(typeof keyProp);
 
         if (number % 2 === 0) {
             return "Dark-Tile"
