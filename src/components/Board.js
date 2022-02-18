@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Square from './Square';
 import './stylesheets/Board.css';
-import Modal from 'react-modal';
 
 const horizontalAxis= ["A", "B", "C", "D", "E", "F", "G", "H"];
 const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -22,12 +21,13 @@ let victorySquare = null;
     }
 })();
 
-function Board() {
+function Board(props) {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState(initialKnight);
     const [knightActive, setKnightActive] = useState(null);
     const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);   
     const currentVertical = Number(knightPosition[1]);
+    const {victory, setVictory} = props;
     const validMoves = {
         validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${currentVertical + 2}`,
         validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${currentVertical + 2}`,
@@ -96,7 +96,6 @@ function Board() {
             }
         }
     }
-    console.log(victorySquare)
 
 
     function dropKnight(e) {
@@ -106,18 +105,21 @@ function Board() {
             const y = e.clientY;
             let element = document.elementsFromPoint(x, y);
             let target = element[1];
-            console.log(target)
+            console.log(target.classList[0])
             if (Object.values(validMoves).includes(target.classList[2]) || target.classList[2] == knightPosition) {
                 setKnightPosition(target.classList[2]);
                 setKnightActive(null);
             } else if (target.classList[0] == "Victory" && Object.values(validMoves).includes(target.classList[1])) {
-                alert("You won!")
+                console.log("You won")
+                setVictory(true);
                 setKnightActive(null);
             } else {
                 alert("That is not a valid move.");
             }
         }
     }
+
+
 
     return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div>;
 }

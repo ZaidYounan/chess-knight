@@ -11,19 +11,17 @@ function Square(props) {
     console.log(`knightPosition is ${knightPosition}`)
 
     function initialImageShow() {
-        if (keyProp === knightPosition) {
+        if (keyProp == knightPosition) {
             return knightimg
-        } else if (keyProp === victorySquare) {
+        } else if (keyProp == victorySquare) {
             return victorysquareimg
-        } else {
-            return null
         }
     }
 
     function giveClass() {
-        if (keyProp === victorySquare) {
+        if (keyProp == victorySquare) {
             return `Victory ${victorySquare}`
-        } else if (keyProp === knightPosition) {
+        } else if (keyProp == knightPosition) {
             return `Knight ${knightPosition}`
         } else {
             return null
@@ -41,7 +39,7 @@ function Square(props) {
     }
 
     function showValidMoves() {
-        if (knightActive && Object.values(validMoves).includes(keyProp)) {
+        if (knightActive && Object.values(validMoves).toString().includes(keyProp)) {
             return "ValidMove" 
         }
     }

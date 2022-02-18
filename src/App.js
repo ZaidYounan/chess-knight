@@ -4,12 +4,19 @@ import React, { useState } from 'react';
 
 function App() {
   const [game, setGame] = useState(false);
+  const [victory, setVictory] = useState(false);
 
   const handleClick = () => setGame(!game);
 
+  function renderVictory() {
+    if (victory) {
+        return <div className="Final">YOU WON!!</div>
+    }
+  } 
+
   function renderBoard() {
     if (game) {
-      return <Board/>
+      return <Board {...{victory, setVictory}} />
     } else {
       return <div className="PlayButton" onClick={handleClick} >PLAY</div>
     }
@@ -17,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+      {renderVictory()}
       {renderBoard()}
     </div>
   );

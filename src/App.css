@@ -29,3 +29,18 @@ div.PlayButton:hover {
   padding-left:15px;
   color:whitesmoke;
 }
+
+.Final {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:absolute;
+  width:30%;
+  height:10%;
+  font-size:xx-large;
+  font-weight:bolder;
+  color:whitesmoke;
+  background-color:goldenrod;
+  box-shadow:5px 10px 15px black;
+}
+
