@@ -39,8 +39,10 @@ div.PlayButton:hover {
   height:10%;
   font-size:xx-large;
   font-weight:bolder;
-  color:whitesmoke;
+  font-family:Helvetica;
+  color:white;
   background-color:goldenrod;
   box-shadow:5px 10px 15px black;
+  border-radius:0.15em;
 }
 

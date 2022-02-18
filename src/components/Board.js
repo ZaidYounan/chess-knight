@@ -110,7 +110,7 @@ function Board(props) {
                 setKnightPosition(target.classList[2]);
                 setKnightActive(null);
             } else if (target.classList[0] == "Victory" && Object.values(validMoves).includes(target.classList[1])) {
-                console.log("You won")
+                console.log("You won!")
                 setVictory(true);
                 setKnightActive(null);
             } else {

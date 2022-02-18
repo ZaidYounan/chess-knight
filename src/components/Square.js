@@ -41,6 +41,8 @@ function Square(props) {
     function showValidMoves() {
         if (knightActive && Object.values(validMoves).toString().includes(keyProp)) {
             return "ValidMove" 
+        } else {
+            return '';
         }
     }
 
