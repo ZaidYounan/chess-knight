@@ -30,16 +30,16 @@ function Board(props) {
     const {victory, setVictory} = props;
     const validMoves = {
         validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex + 2] }`,
-        validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${verticalAxis[currentVerticalIndex + 2] }`,
-        validThree : `${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex - 2] }`,
-        validFour : `${horizontalAxis[currentHorizontalIndex - 1]}${verticalAxis[currentVerticalIndex - 2] }`,
-        validFive : `${horizontalAxis[currentHorizontalIndex + 2]}${verticalAxis[currentVerticalIndex + 1] }`,
-        validSix : `${horizontalAxis[currentHorizontalIndex - 2]}${verticalAxis[currentVerticalIndex + 1] }`,
-        validSeven : `${horizontalAxis[currentHorizontalIndex + 2]}${verticalAxis[currentVerticalIndex - 1] }`,
-        validEight : `${horizontalAxis[currentHorizontalIndex - 2]}${verticalAxis[currentVerticalIndex - 1] }`
+        validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${verticalAxis[currentVerticalIndex + 2]}`,
+        validThree : `${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex - 2]}`,
+        validFour : `${horizontalAxis[currentHorizontalIndex - 1]}${verticalAxis[currentVerticalIndex - 2]}`,
+        validFive : `${horizontalAxis[currentHorizontalIndex + 2]}${verticalAxis[currentVerticalIndex + 1]}`,
+        validSix : `${horizontalAxis[currentHorizontalIndex - 2]}${verticalAxis[currentVerticalIndex + 1]}`,
+        validSeven : `${horizontalAxis[currentHorizontalIndex + 2]}${verticalAxis[currentVerticalIndex - 1]}`,
+        validEight : `${horizontalAxis[currentHorizontalIndex - 2]}${verticalAxis[currentVerticalIndex - 1]}`
         };
 
-    const validMovesArray = Object.values(validMoves).filter(value => value.length < 3);
+    const validMovesArray = Object.values(validMoves).filter(value => value.length == 2);
     
     console.log(validMoves)
     console.log(validMovesArray)

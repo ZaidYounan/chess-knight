@@ -10,7 +10,7 @@ function App() {
 
   function renderVictory() {
     if (victory) {
-        return <div className="Final">YOU WON!!</div>
+        return <div className="Final"><p>YOU WON!!</p><button className="Replay" onClick={() => {setGame(false); setVictory(false)}}>Play again?</button></div>
     }
   } 
 
