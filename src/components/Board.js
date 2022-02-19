@@ -25,29 +25,33 @@ function Board(props) {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState(initialKnight);
     const [knightActive, setKnightActive] = useState(null);
-    const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);   
-    const currentVertical = Number(knightPosition[1]);
+    const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
+    const currentVerticalIndex = verticalAxis.indexOf(knightPosition[1]);
     const {victory, setVictory} = props;
     const validMoves = {
-        validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${currentVertical + 2}`,
-        validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${currentVertical + 2}`,
-        validThree : `${horizontalAxis[currentHorizontalIndex + 1]}${currentVertical - 2}`,
-        validFour : `${horizontalAxis[currentHorizontalIndex - 1]}${currentVertical - 2}`,
-        validFive : `${horizontalAxis[currentHorizontalIndex + 2]}${currentVertical + 1}`,
-        validSix : `${horizontalAxis[currentHorizontalIndex - 2]}${currentVertical + 1}`,
-        validSeven : `${horizontalAxis[currentHorizontalIndex + 2]}${currentVertical - 1}`,
-        validEight : `${horizontalAxis[currentHorizontalIndex - 2]}${currentVertical - 1}`
+        validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex + 2] }`,
+        validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${verticalAxis[currentVerticalIndex + 2] }`,
+        validThree : `${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex - 2] }`,
+        validFour : `${horizontalAxis[currentHorizontalIndex - 1]}${verticalAxis[currentVerticalIndex - 2] }`,
+        validFive : `${horizontalAxis[currentHorizontalIndex + 2]}${verticalAxis[currentVerticalIndex + 1] }`,
+        validSix : `${horizontalAxis[currentHorizontalIndex - 2]}${verticalAxis[currentVerticalIndex + 1] }`,
+        validSeven : `${horizontalAxis[currentHorizontalIndex + 2]}${verticalAxis[currentVerticalIndex - 1] }`,
+        validEight : `${horizontalAxis[currentHorizontalIndex - 2]}${verticalAxis[currentVerticalIndex - 1] }`
         };
 
+    const validMovesArray = Object.values(validMoves).filter(value => value.length < 3);
+    
+    console.log(validMoves)
+    console.log(validMovesArray)
+
     let board = [];
-
-
+    
     for (let i = verticalAxis.length - 1; i >= 0; i--) {
         for (let k = 0; k < horizontalAxis.length; k++) {
   
           let keyProp = `${horizontalAxis[k]}${verticalAxis[i]}`
   
-          board.push(<Square key={keyProp} {...{k, i, keyProp, knightPosition, victorySquare, validMoves, knightActive}}/>
+          board.push(<Square key={keyProp} {...{k, i, keyProp, knightPosition, victorySquare, validMovesArray, knightActive}}/>
           );
         }
       }
@@ -68,7 +72,6 @@ function Board(props) {
         const boardObject = boardRef.current;
 
         if (knightActive && knightActive.classList.contains("Knight")) {
-            
 
             const minHorizontal = boardObject.offsetLeft - 13;
             const minVertical = boardObject.offsetTop - 13;
@@ -106,10 +109,11 @@ function Board(props) {
             let element = document.elementsFromPoint(x, y);
             let target = element[1];
             console.log(target.classList[0])
-            if (Object.values(validMoves).includes(target.classList[2]) || target.classList[2] == knightPosition) {
+            if (validMovesArray.includes(target.classList[2]) || target.classList[2] == knightPosition) {
+                knightActive.style.position = "static";
                 setKnightPosition(target.classList[2]);
                 setKnightActive(null);
-            } else if (target.classList[0] == "Victory" && Object.values(validMoves).includes(target.classList[1])) {
+            } else if (target.classList[0] == "Victory" && validMovesArray.includes(target.classList[1])) {
                 console.log("You won!")
                 setVictory(true);
                 setKnightActive(null);
