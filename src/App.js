@@ -10,15 +10,15 @@ function App() {
 
   function renderVictory() {
     if (victory) {
-        return <div className="Final"><p>YOU WON!!</p><button className="Replay" onClick={() => {setGame(false); setVictory(false)}}>Play again?</button></div>
+        return <div className="Final"><p>YOU WON!!</p><button className="Replay" onClick={() => {setGame(false); setVictory(false);}}>Play again?</button></div>
     }
   } 
 
   function renderBoard() {
     if (game) {
-      return <Board {...{victory, setVictory}} />
+      return <Board {...{victory, setVictory, game}}/>
     } else {
-      return <div className="PlayButton" onClick={handleClick} >PLAY</div>
+      return <div className="PlayButton" onClick={handleClick}>PLAY</div>
     }
   }
 

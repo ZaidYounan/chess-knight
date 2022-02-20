@@ -21,13 +21,14 @@ let victorySquare = null;
     }
 })();
 
+
 function Board(props) {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState(initialKnight);
     const [knightActive, setKnightActive] = useState(null);
     const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
     const currentVerticalIndex = verticalAxis.indexOf(knightPosition[1]);
-    const {victory, setVictory} = props;
+    const {victory, setVictory, game} = props;
     const validMoves = {
         validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex + 2] }`,
         validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${verticalAxis[currentVerticalIndex + 2]}`,
@@ -40,6 +41,13 @@ function Board(props) {
         };
 
     const validMovesArray = Object.values(validMoves).filter(value => value.length == 2);
+
+    useEffect(() => {
+        if (game) {
+            setKnightPosition(initialKnight);
+        }
+    }, [game]) 
+
     
     console.log(validMoves)
     console.log(validMovesArray)
