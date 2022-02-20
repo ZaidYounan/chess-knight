@@ -4,27 +4,26 @@ import './stylesheets/Board.css';
 
 const horizontalAxis= ["A", "B", "C", "D", "E", "F", "G", "H"];
 const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
-const initialKnightPosition = { 
-    xKnightPosition: horizontalAxis[Math.floor((Math.random() * 7) + 0)],
-    yKnightPosition: verticalAxis[Math.floor((Math.random() * 7) + 0)]
-}
-const {xKnightPosition, yKnightPosition} = initialKnightPosition;
-const initialKnight = `${xKnightPosition}${yKnightPosition}`
+// const initialKnightPosition = { 
+//     xKnightPosition: horizontalAxis[Math.floor((Math.random() * 7) + 0)],
+//     yKnightPosition: verticalAxis[Math.floor((Math.random() * 7) + 0)]
+// }
+// const {xKnightPosition, yKnightPosition} = initialKnightPosition;
 
 let victorySquare = null;
 
-(function () {
-    while (victorySquare === null || victorySquare === `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`) {
-        let xVictoryPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
-        let yVictoryPosition = verticalAxis[Math.floor((Math.random() * 7) + 0)];
-        return victorySquare = `${xVictoryPosition}${yVictoryPosition}`
-    }
-})();
 
 
 function Board(props) {
     const boardRef = useRef(null);
-    const [knightPosition, setKnightPosition] = useState(initialKnight);
+    const [knightPosition, setKnightPosition] = useState(() => {
+        let initialKnight = '';
+        const initialKnightPosition = { 
+            xKnightPosition: horizontalAxis[Math.floor((Math.random() * 7) + 0)],
+            yKnightPosition: verticalAxis[Math.floor((Math.random() * 7) + 0)]
+        }
+        return initialKnight = `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`
+    });
     const [knightActive, setKnightActive] = useState(null);
     const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
     const currentVerticalIndex = verticalAxis.indexOf(knightPosition[1]);
@@ -42,11 +41,26 @@ function Board(props) {
 
     const validMovesArray = Object.values(validMoves).filter(value => value.length == 2);
 
-    useEffect(() => {
-        if (game) {
-            setKnightPosition(initialKnight);
+    (function () {
+        while (victorySquare === null) {
+            if (victorySquare === knightPosition) {
+                let xVictoryPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
+                let yVictoryPosition = verticalAxis[Math.floor((Math.random() * 7) + 0)];
+                return victorySquare = `${xVictoryPosition}${yVictoryPosition}`
+            } else {
+                let xVictoryPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
+                let yVictoryPosition = verticalAxis[Math.floor((Math.random() * 7) + 0)];
+                return victorySquare = `${xVictoryPosition}${yVictoryPosition}`
+            }
         }
-    }, [game]) 
+    })();
+    
+
+    // useEffect(() => {
+    //     if (game) {
+    //         setKnightPosition(initialKnight);
+    //     }
+    // }, [game]) 
 
     
     console.log(validMoves)
