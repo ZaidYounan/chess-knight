@@ -9,11 +9,9 @@ function Board(props) {
     const boardRef = useRef(null);
     const [knightPosition, setKnightPosition] = useState(() => {
         let initialKnight = '';
-        const initialKnightPosition = { 
-            xKnightPosition: horizontalAxis[Math.floor((Math.random() * 7) + 0)],
-            yKnightPosition: verticalAxis[Math.floor((Math.random() * 7) + 0)]
-        }
-        return initialKnight = `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`
+        let xKnightPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
+        let yKnightPosition = verticalAxis[Math.floor((Math.random() * 7) + 0)];
+        return initialKnight = `${xKnightPosition}${yKnightPosition}`
     });
     const [victorySquare, setVictorySquare] = useState(() => {
         let initialSquare = '';
@@ -122,9 +120,42 @@ function Board(props) {
         }
     }
 
+    function handleClick(validMovesArray) {
+        let fakePosition = '';
+        for (let i = 0; i < validMovesArray.length; i++) {
+            if (validMovesArray[i] === victorySquare) {
+                console.log("help used")
+                setKnightPosition(validMovesArray[i]);
+                setVictory(true);
+                setVictorySquare('');
+            }
+            // for (let k = 0; k < 6; k++) {
+            //     if (validMovesArray[i] === victorySquare) {
+            //         setKnightPosition(validMovesArray[i]);
+            //     } else {
+            //         fakePosition = validMovesArray[i];
+            //         for (let r = 0; r < validMovesArray.length; r++) {
+            //             let currentHorizontalAxis = fakePosition[0];
+            //             let currentVerticalAxis = fakePosition[1];
+            //             const validMoves = {
+            //                 validOne :`${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis + 2] }`,
+            //                 validTwo : `${horizontalAxis[currentHorizontalAxis + -1]}${verticalAxis[currentVerticalAxis + 2]}`,
+            //                 validThree : `${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis - 2]}`,
+            //                 validFour : `${horizontalAxis[currentHorizontalAxis - 1]}${verticalAxis[currentVerticalAxis - 2]}`,
+            //                 validFive : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis + 1]}`,
+            //                 validSix : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis + 1]}`,
+            //                 validSeven : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis - 1]}`,
+            //                 validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
+            //                 };
+            //         }
+            //     }
+            //     }
+        }
+    }
 
 
-    return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div>;
+
+    return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}<button onClick={() => handleClick(validMovesArray)}>Help!</button></div>;
 }
 
 export default Board;
