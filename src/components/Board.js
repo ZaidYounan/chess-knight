@@ -131,9 +131,9 @@ function Board(props) {
                     setVictorySquare('');
                     setHelp(false);
                 } else {
-                    let position = validMovesArray[i];
-                    let currentHorizontalAxis = fakePosition[0];
-                    let currentVerticalAxis = fakePosition[1];
+                    const fakePosition = validMovesArray[i];
+                    const currentHorizontalAxis = horizontalAxis.indexOf(fakePosition[0]);
+                    const currentVerticalAxis = verticalAxis.indexOf(fakePosition[1]);
                     const validMoves = {
                         validOne :`${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis + 2] }`,
                         validTwo : `${horizontalAxis[currentHorizontalAxis + -1]}${verticalAxis[currentVerticalAxis + 2]}`,
