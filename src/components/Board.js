@@ -15,7 +15,7 @@ function Board(props) {
         }
         return initialKnight = `${initialKnightPosition.xKnightPosition}${initialKnightPosition.yKnightPosition}`
     });
-    const [victorySquare] = useState(() => {
+    const [victorySquare, setVictorySquare] = useState(() => {
         let initialSquare = '';
         while (initialSquare === '' || initialSquare === knightPosition) {
                 let xVictoryPosition = horizontalAxis[Math.floor((Math.random() * 7) + 0)];
@@ -107,7 +107,6 @@ function Board(props) {
             const y = e.clientY;
             let element = document.elementsFromPoint(x, y);
             let target = element[1];
-            console.log(target.classList[0])
             if (validMovesArray.includes(target.classList[2]) || target.classList[2] == knightPosition) {
                 knightActive.style.position = "static";
                 setKnightPosition(target.classList[2]);
@@ -115,6 +114,7 @@ function Board(props) {
             } else if (target.classList[0] == "Victory" && validMovesArray.includes(target.classList[1])) {
                 console.log("You won!")
                 setVictory(true);
+                setVictorySquare('');
                 setKnightActive(null);
             } else {
                 alert("That is not a valid move.");
