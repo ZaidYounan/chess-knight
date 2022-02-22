@@ -37,7 +37,6 @@ function Board(props) {
         };
 
     const validMovesArray = Object.values(validMoves).filter(value => value.length == 2);
-
     
     console.log(victorySquare)
 
@@ -120,15 +119,33 @@ function Board(props) {
         }
     }
 
-    function helpButton(validMovesArray) {
+    ((validMovesArray) => {
         if (help === true) {
-            let fakePosition = '';
+            console.log(validMovesArray)
+            let position = '';
             for (let i = 0; i < validMovesArray.length; i++) {
                 if (validMovesArray[i] === victorySquare) {
                     console.log("help used")
                     setKnightPosition(validMovesArray[i]);
                     setVictory(true);
                     setVictorySquare('');
+                    setHelp(false);
+                } else {
+                    let position = validMovesArray[i];
+                    let currentHorizontalAxis = fakePosition[0];
+                    let currentVerticalAxis = fakePosition[1];
+                    const validMoves = {
+                        validOne :`${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis + 2] }`,
+                        validTwo : `${horizontalAxis[currentHorizontalAxis + -1]}${verticalAxis[currentVerticalAxis + 2]}`,
+                        validThree : `${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis - 2]}`,
+                        validFour : `${horizontalAxis[currentHorizontalAxis - 1]}${verticalAxis[currentVerticalAxis - 2]}`,
+                        validFive : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis + 1]}`,
+                        validSix : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis + 1]}`,
+                        validSeven : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis - 1]}`,
+                        validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
+                        };
+                    
+                    
                 }
                 // for (let k = 0; k < 6; k++) {
                 //     if (validMovesArray[i] === victorySquare) {
@@ -136,24 +153,13 @@ function Board(props) {
                 //     } else {
                 //         fakePosition = validMovesArray[i];
                 //         for (let r = 0; r < validMovesArray.length; r++) {
-                //             let currentHorizontalAxis = fakePosition[0];
-                //             let currentVerticalAxis = fakePosition[1];
-                //             const validMoves = {
-                //                 validOne :`${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis + 2] }`,
-                //                 validTwo : `${horizontalAxis[currentHorizontalAxis + -1]}${verticalAxis[currentVerticalAxis + 2]}`,
-                //                 validThree : `${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis - 2]}`,
-                //                 validFour : `${horizontalAxis[currentHorizontalAxis - 1]}${verticalAxis[currentVerticalAxis - 2]}`,
-                //                 validFive : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis + 1]}`,
-                //                 validSix : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis + 1]}`,
-                //                 validSeven : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis - 1]}`,
-                //                 validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
-                //                 };
                 //         }
                 //     }
                 //     }
             } 
         }
-    }
+    }) (validMovesArray);
+
 
 
 

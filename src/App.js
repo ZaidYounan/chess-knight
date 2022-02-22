@@ -9,7 +9,7 @@ function App() {
 
   const handleClick = () => setGame(!game);
   
-  const handleHelpClick = () => setHelp(true);
+  const handleHelpClick = () => {setHelp(true)}
 
   function renderVictory() {
     if (victory) {
@@ -19,7 +19,7 @@ function App() {
 
   function renderBoard() {
     if (game) {
-      return <div className="Main"><Board {...{victory, setVictory, game, help, setHelp}}/><div onClick={() => handleHelpClick} className="HelpButton">Help!</div></div>
+      return <div className="Main"><Board {...{victory, setVictory, game, help, setHelp}}/><div onClick={handleHelpClick} className="HelpButton">Help!</div></div>
     } else {
       return <div className="PlayButton" onClick={handleClick}>PLAY</div>
     }
