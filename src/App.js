@@ -5,8 +5,11 @@ import React, { useState } from 'react';
 function App() {
   const [game, setGame] = useState(false);
   const [victory, setVictory] = useState(false);
+  const [help, setHelp] = useState(false);
 
   const handleClick = () => setGame(!game);
+  
+  const handleHelpClick = () => setHelp(true);
 
   function renderVictory() {
     if (victory) {
@@ -16,7 +19,7 @@ function App() {
 
   function renderBoard() {
     if (game) {
-      return <Board {...{victory, setVictory, game}}/>
+      return <div className="Main"><Board {...{victory, setVictory, game, help, setHelp}}/><div onClick={() => handleHelpClick} className="HelpButton">Help!</div></div>
     } else {
       return <div className="PlayButton" onClick={handleClick}>PLAY</div>
     }
