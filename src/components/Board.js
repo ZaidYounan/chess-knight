@@ -120,9 +120,9 @@ function Board(props) {
     }
 
     ((validMovesArray) => {
+        console.log(help)
         if (help === true) {
-            console.log(validMovesArray)
-            let position = '';
+            // console.log(validMovesArray)
             for (let i = 0; i < validMovesArray.length; i++) {
                 if (validMovesArray[i] === victorySquare) {
                     console.log("help used")
@@ -131,12 +131,15 @@ function Board(props) {
                     setVictorySquare('');
                     setHelp(false);
                 } else {
-                    let position = validMovesArray[i];
-                    let currentHorizontalAxis = fakePosition[0];
-                    let currentVerticalAxis = fakePosition[1];
+                    const fakePosition = validMovesArray[i];
+                    const currentHorizontalAxis = horizontalAxis.indexOf(fakePosition[0]);
+                    const currentVerticalAxis = verticalAxis.indexOf(fakePosition[1]);
+                    let moveCount = [];
+                    const moveArray = [];
+                    const moveStore = {};
                     const validMoves = {
                         validOne :`${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis + 2] }`,
-                        validTwo : `${horizontalAxis[currentHorizontalAxis + -1]}${verticalAxis[currentVerticalAxis + 2]}`,
+                        validTwo : `${horizontalAxis[currentHorizontalAxis + - 1]}${verticalAxis[currentVerticalAxis + 2]}`,
                         validThree : `${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis - 2]}`,
                         validFour : `${horizontalAxis[currentHorizontalAxis - 1]}${verticalAxis[currentVerticalAxis - 2]}`,
                         validFive : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis + 1]}`,
@@ -144,18 +147,24 @@ function Board(props) {
                         validSeven : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis - 1]}`,
                         validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
                         };
-                    
-                    
+                    const possibleMoves = Object.values(validMoves).filter(value => value.length == 2);
+
+                    for (let k = 0; k < possibleMoves.length; k++) {
+                        if (possibleMoves[k] === victorySquare) {
+                            console.log("help used")
+                            console.log(possibleMoves);
+                            moveCount += 1;
+                            moveStore[k] = [fakePosition, possibleMoves[k], moveCount]
+                            console.log(JSON.stringify(moveStore));
+                            console.log("target is" + moveStore[k][0])
+                            setHelp(false);
+                            setKnightPosition(moveStore[k][0]);
+                            break
+                        }
+                    }
+                    break
+
                 }
-                // for (let k = 0; k < 6; k++) {
-                //     if (validMovesArray[i] === victorySquare) {
-                //         setKnightPosition(validMovesArray[i]);
-                //     } else {
-                //         fakePosition = validMovesArray[i];
-                //         for (let r = 0; r < validMovesArray.length; r++) {
-                //         }
-                //     }
-                //     }
             } 
         }
     }) (validMovesArray);
