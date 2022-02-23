@@ -144,6 +144,7 @@ function Board(props) {
                         validSeven : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis - 1]}`,
                         validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
                         };
+                    setHelp(false);
                     
                     
                 }
