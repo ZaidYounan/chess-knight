@@ -121,8 +121,6 @@ function Board(props) {
 
     ((validMovesArray) => {
         if (help === true) {
-            console.log(validMovesArray)
-            let position = '';
             for (let i = 0; i < validMovesArray.length; i++) {
                 if (validMovesArray[i] === victorySquare) {
                     console.log("help used")
@@ -145,18 +143,7 @@ function Board(props) {
                         validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
                         };
                     setHelp(false);
-                    
-                    
                 }
-                // for (let k = 0; k < 6; k++) {
-                //     if (validMovesArray[i] === victorySquare) {
-                //         setKnightPosition(validMovesArray[i]);
-                //     } else {
-                //         fakePosition = validMovesArray[i];
-                //         for (let r = 0; r < validMovesArray.length; r++) {
-                //         }
-                //     }
-                //     }
             } 
         }
     }) (validMovesArray);

@@ -99,9 +99,7 @@ button.Replay:hover {
 .HelpButton:hover {
   transition: all 0.2s;
   font-weight:bolder;
-  padding-right:15px;
-  padding-left:15px;
   color:whitesmoke;
-  cursor:grab;
+  cursor:pointer;
 
 }
