@@ -1,3 +1,11 @@
+.BoardPage {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 100%;
+  width: 100%;
+}
+
 .Board {
     display:flex;
     flex-wrap:wrap;
@@ -6,4 +14,27 @@
     height:600px;
   }
 
+.HelpButton {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:150px;
+  height:40px;
+  background-color:rgb(5, 207, 5);
+  box-shadow: 5px 10px 15px black;
+  user-select:none;
+  font-size:large;
+  font-weight:bold;
+  font-family: Helvetica;
+  border-radius:0.2em;
+  color:black;
+  margin:5%;
+}
 
+.HelpButton:hover {
+  transition: all 0.2s;
+  font-weight:bolder;
+  color:whitesmoke;
+  cursor:pointer;
+
+}

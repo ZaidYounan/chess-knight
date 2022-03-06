@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Square from './Square';
 import './stylesheets/Board.css';
 
-const horizontalAxis= ["A", "B", "C", "D", "E", "F", "G", "H"];
+const horizontalAxis = ["A", "B", "C", "D", "E", "F", "G", "H"];
 const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 function Board(props) {
@@ -22,9 +22,10 @@ function Board(props) {
             }
     })
     const [knightActive, setKnightActive] = useState(null);
+    const [help, setHelp] = useState(false);
     const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
     const currentVerticalIndex = verticalAxis.indexOf(knightPosition[1]);
-    const {victory, setVictory, game, help, setHelp} = props;
+    const {victory, setVictory, game} = props;
     const validMoves = {
         validOne :`${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex + 2] }`,
         validTwo : `${horizontalAxis[currentHorizontalIndex + -1]}${verticalAxis[currentVerticalIndex + 2]}`,
@@ -37,6 +38,11 @@ function Board(props) {
         };
 
     const validMovesArray = Object.values(validMoves).filter(value => value.length == 2);
+
+
+
+    const handleHelpClick = () => {setHelp(true)}
+
     
     console.log(victorySquare)
 
@@ -121,30 +127,32 @@ function Board(props) {
 
     ((validMovesArray) => {
         if (help === true) {
-            for (let i = 0; i < validMovesArray.length; i++) {
-                if (validMovesArray[i] === victorySquare) {
+                if (validMovesArray.includes(victorySquare)) {
                     console.log("help used")
-                    setKnightPosition(validMovesArray[i]);
+                    setKnightPosition(victorySquare);
                     setVictory(true);
                     setVictorySquare('');
                     setHelp(false);
                 } else {
-                    const fakePosition = validMovesArray[i];
-                    const currentHorizontalAxis = horizontalAxis.indexOf(fakePosition[0]);
-                    const currentVerticalAxis = verticalAxis.indexOf(fakePosition[1]);
-                    const validMoves = {
-                        validOne :`${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis + 2] }`,
-                        validTwo : `${horizontalAxis[currentHorizontalAxis + -1]}${verticalAxis[currentVerticalAxis + 2]}`,
-                        validThree : `${horizontalAxis[currentHorizontalAxis + 1]}${verticalAxis[currentVerticalAxis - 2]}`,
-                        validFour : `${horizontalAxis[currentHorizontalAxis - 1]}${verticalAxis[currentVerticalAxis - 2]}`,
-                        validFive : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis + 1]}`,
-                        validSix : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis + 1]}`,
-                        validSeven : `${horizontalAxis[currentHorizontalAxis + 2]}${verticalAxis[currentVerticalAxis - 1]}`,
-                        validEight : `${horizontalAxis[currentHorizontalAxis - 2]}${verticalAxis[currentVerticalAxis - 1]}`
-                        };
+                    const distanceScore = {};
+                    
+                    for (let i = 0; i < validMovesArray.length; i++) {
+                        const currentHorizontalAxis = horizontalAxis.indexOf(validMovesArray[i][0]);
+                        const currentVerticalAxis = verticalAxis.indexOf(validMovesArray[i][1]);
+                        const horizontalDistance = Math.abs(currentHorizontalAxis - horizontalAxis.indexOf(victorySquare[0]));
+                        const verticalDistance = Math.abs(currentVerticalAxis - verticalAxis.indexOf(victorySquare[1]));
+                        distanceScore[validMovesArray[i]] = horizontalDistance + verticalDistance;
+                    }
+
+                    //Close to solution - find way to get key of lowest value in distanceScore object, that key will be the next move
+                    const keys = Object.keys(distanceScore);
+                    const values = Object.values(distanceScore);
+                    const lowest = Math.min(...values);
+                    const indexLowest = values.findIndex((value) => value === lowest);
+                    const targetSquare = keys[indexLowest];
+                    setKnightPosition(targetSquare);
                     setHelp(false);
                 }
-            } 
         }
     }) (validMovesArray);
 
@@ -152,7 +160,7 @@ function Board(props) {
 
 
 
-    return <div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div>;
+    return <div className="BoardPage"><div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div><div onClick={handleHelpClick} className="HelpButton">Help!</div></div>;
 }
 
 export default Board;

@@ -80,26 +80,3 @@ button.Replay:hover {
   transition:all .2s;
 }
 
-.HelpButton {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:150px;
-  height:40px;
-  background-color:rgb(5, 207, 5);
-  box-shadow: 5px 10px 15px black;
-  user-select:none;
-  font-size:large;
-  font-weight:bold;
-  font-family: Helvetica;
-  border-radius:0.2em;
-  color:black;
-}
-
-.HelpButton:hover {
-  transition: all 0.2s;
-  font-weight:bolder;
-  color:whitesmoke;
-  cursor:pointer;
-
-}
