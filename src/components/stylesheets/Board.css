@@ -12,6 +12,7 @@
     background-color:red;
     width:600px;
     height:600px;
+    box-shadow: 12px 12px 20px black;
   }
 
 .HelpButton {

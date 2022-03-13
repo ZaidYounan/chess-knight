@@ -22,7 +22,6 @@ function Board(props) {
             }
     })
     const [knightActive, setKnightActive] = useState(null);
-    const [help, setHelp] = useState(false);
     const currentHorizontalIndex = horizontalAxis.indexOf(knightPosition[0]);
     const currentVerticalIndex = verticalAxis.indexOf(knightPosition[1]);
     const {victory, setVictory, game} = props;
@@ -39,11 +38,6 @@ function Board(props) {
 
     const validMovesArray = Object.values(validMoves).filter(value => value.length == 2);
 
-
-
-    const handleHelpClick = () => {setHelp(true)}
-
-    
     console.log(victorySquare)
 
     let board = [];
@@ -104,7 +98,6 @@ function Board(props) {
 
 
     function dropKnight(e) {
-
         if (knightActive) {
             const x = e.clientX;
             const y = e.clientY;
@@ -125,42 +118,65 @@ function Board(props) {
         }
     }
 
-    ((validMovesArray) => {
-        if (help === true) {
-                if (validMovesArray.includes(victorySquare)) {
-                    console.log("help used")
-                    setKnightPosition(victorySquare);
-                    setVictory(true);
-                    setVictorySquare('');
-                    setHelp(false);
-                } else {
-                    const distanceScore = {};
-                    
-                    for (let i = 0; i < validMovesArray.length; i++) {
-                        const currentHorizontalAxis = horizontalAxis.indexOf(validMovesArray[i][0]);
-                        const currentVerticalAxis = verticalAxis.indexOf(validMovesArray[i][1]);
-                        const horizontalDistance = Math.abs(currentHorizontalAxis - horizontalAxis.indexOf(victorySquare[0]));
-                        const verticalDistance = Math.abs(currentVerticalAxis - verticalAxis.indexOf(victorySquare[1]));
-                        distanceScore[validMovesArray[i]] = horizontalDistance + verticalDistance;
-                    }
+    function helpButton(validMovesArray) {
 
-                    //Close to solution - find way to get key of lowest value in distanceScore object, that key will be the next move
-                    const keys = Object.keys(distanceScore);
-                    const values = Object.values(distanceScore);
-                    const lowest = Math.min(...values);
-                    const indexLowest = values.findIndex((value) => value === lowest);
-                    const targetSquare = keys[indexLowest];
-                    setKnightPosition(targetSquare);
-                    setHelp(false);
-                }
+      const cornerSquare = [];
+
+      const currentHorizontalIndex = horizontalAxis.indexOf(victorySquare[0]);
+      const currentVerticalIndex = verticalAxis.indexOf(victorySquare[1]);
+      const topRightCorner = `${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex + 1]}`;
+      const topLeftCorner = `${horizontalAxis[currentHorizontalIndex - 1]}${verticalAxis[currentVerticalIndex + 1]}`;
+      const bottomRightCorner = `${horizontalAxis[currentHorizontalIndex + 1]}${verticalAxis[currentVerticalIndex - 1]}`;
+      const bottomLeftCorner = `${horizontalAxis[currentHorizontalIndex - 1]}${verticalAxis[currentVerticalIndex - 1]}`;
+
+      cornerSquare.push(topRightCorner, topLeftCorner, bottomRightCorner, bottomLeftCorner);
+
+      console.log(cornerSquare)
+
+      if (validMovesArray.includes(victorySquare)) {
+        console.log("help used")
+        setKnightPosition(victorySquare);
+        setVictory(true);
+        setVictorySquare('');
+      } else {
+        // const cornerMove = validMovesArray.findIndex(validMovesArray.some(square => cornerSquare.includes(square)));
+
+        let corner = false;
+        let cornerMove = null;
+        
+        for (let k = 0; k < validMovesArray.length; k++) {
+          for (let r = 0; r < 4; r++) {
+            if (validMovesArray[k] === cornerSquare[r]) {
+              corner = true;
+              cornerMove = validMovesArray[k];
+              setKnightPosition(cornerMove);
+            }
+          }
         }
-    }) (validMovesArray);
+
+        if (corner === false)  {    
+          const distanceScore = {};
+
+          for (let i = 0; i < validMovesArray.length; i++) {
+            const currentHorizontalAxis = horizontalAxis.indexOf(validMovesArray[i][0]);
+            const currentVerticalAxis = verticalAxis.indexOf(validMovesArray[i][1]);
+            const horizontalDistance = Math.abs(currentHorizontalAxis - horizontalAxis.indexOf(victorySquare[0]));
+            const verticalDistance = Math.abs(currentVerticalAxis - verticalAxis.indexOf(victorySquare[1]));
+            distanceScore[validMovesArray[i]] = horizontalDistance + verticalDistance;
+          }
+
+          const keys = Object.keys(distanceScore);
+          const values = Object.values(distanceScore);
+          const lowest = Math.min(...values);
+          const indexLowest = values.findIndex((value) => value === lowest);
+          const targetSquare = keys[indexLowest];
+          setKnightPosition(targetSquare);
+          }
+        }
+    }
 
 
-
-
-
-    return <div className="BoardPage"><div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div><div onClick={handleHelpClick} className="HelpButton">Help!</div></div>;
+    return <div className="BoardPage"><div ref={boardRef} onMouseDown={e => grabKnight(e)} onMouseMove={e => moveKnight(e)} onMouseUp={(e) => dropKnight(e)} className="Board">{board}</div><div onClick={() => helpButton(validMovesArray)} className="HelpButton">Help!</div></div>;
 }
 
 export default Board;
